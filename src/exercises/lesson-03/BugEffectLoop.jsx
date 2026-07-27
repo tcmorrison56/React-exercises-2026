@@ -14,7 +14,9 @@ export default function BugEffectLoop() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setCount(count + 1);
+    const timer = setTimeout(() => setCount((previous) => previous + 1), 0);
+
+    return clearTimeout(timer);
   }, []);
 
   return <p>Bug 1 Count: {count}</p>;
