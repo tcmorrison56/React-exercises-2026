@@ -13,8 +13,7 @@ export default function BugMutatedState() {
   let [count, setCount] = useState(0);
 
   function handleAdd() {
-    count++;
-    setCount(count);
+    setCount((previous) => previous + 1);
   }
 
   return (
@@ -26,4 +25,4 @@ export default function BugMutatedState() {
 }
 
 // Explanation:
-// (Write your explanation here)
+// Before the handleAdd function was mutating the state variable that is supposed to be immutable. By using a function and passing an argument (this is whatever the current state is) we are creating a new current state that we'll have access to.

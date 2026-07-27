@@ -15,10 +15,10 @@ export default function BugEffectLoop() {
 
   useEffect(() => {
     setCount(count + 1);
-  });
+  }, []);
 
   return <p>Bug 1 Count: {count}</p>;
 }
 
 // Explanation:
-// (Write your explanation here)
+// The original code was missing the dependency array. The empty dependency array means useEffect will only run when the component mounts. I am assuming using setCount immediately to change the count is just to test the knowledge of useEffect, but wouldn't it be better to just set the state of the count to 1 to begin with? This would get rid of the eslint error about cascading renders.
