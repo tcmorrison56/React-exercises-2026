@@ -7,10 +7,13 @@ export default function BugStrictMode() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setCount((c) => c + 1);
     }, 1000);
-  }, []);
+
+    // Add cleanup function to remove interval on component unmount
+    return () => clearInterval(interval);
+  }, [count]);
 
   return (
     <div>
@@ -21,3 +24,5 @@ export default function BugStrictMode() {
 }
 
 // Write your explanation of how StrictMode helps us catch this bug
+
+// With strict mode enabled, the component is mounted, then unmounted, then mounted again. To fix the issue we needed to add a cleanup function the remove the interval when the component is unmounted. Without this when the component is mounted a second time we have two intervals running simultaneously which is why it was incrementing by 2.
