@@ -12,11 +12,14 @@ import { useEffect, useState } from 'react';
 
 export default function BugEffectLoop() {
   const [count, setCount] = useState(0);
-
-  useEffect(() => {
+  function increaseCount() {
     const timer = setTimeout(() => setCount((previous) => previous + 1), 0);
 
     return clearTimeout(timer);
+  }
+
+  useEffect(() => {
+    increaseCount();
   }, []);
 
   return <p>Bug 1 Count: {count}</p>;
